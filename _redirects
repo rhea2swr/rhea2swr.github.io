@@ -1,0 +1,13 @@
+# 포스트 URL(/각-포스트-슬러그/)은 기존 워드프레스 퍼머링크와 완전히 동일한
+# 구조로 이관했기 때문에 리다이렉트가 필요 없다.
+#
+# 카테고리 아카이브만 구조가 바뀌었다 — 기존엔 중첩 경로
+# (/category/plan-your-trip/entry-and-basics/visa-and-k-eta/ 같은 식으로
+# 카테고리마다 있었음), 지금은 대분류 5개 그룹 페이지로 통합
+# (/category/plan-your-trip/ 등). 일단 대분류 단위로 리다이렉트해서 유입을
+# 보존하고, 나중에 카테고리별 1:1 매핑이 필요하면 위에 개별 규칙을 추가한다.
+/category/plan-your-trip/*   /category/plan-your-trip/   301
+/category/where-to-go/*      /category/where-to-go/      301
+/category/things-to-do/*     /category/things-to-do/     301
+/category/korea-maps/*       /category/korea-maps/       301
+/category/site-map/*         /category/site-map/         301
