@@ -6,8 +6,34 @@
 # 카테고리마다 있었음), 지금은 대분류 5개 그룹 페이지로 통합
 # (/category/plan-your-trip/ 등). 일단 대분류 단위로 리다이렉트해서 유입을
 # 보존하고, 나중에 카테고리별 1:1 매핑이 필요하면 위에 개별 규칙을 추가한다.
+#
+# 주의: `/category/xxx/*` 패턴은 `*`가 빈 문자열도 매치하기 때문에
+# 허브 페이지 자기 자신(`/category/xxx/`)도 매치해버려서 자기 자신으로
+# 무한 리다이렉트되는 버그가 있었다. 아래처럼 정확히 일치하는 허브
+# 경로를 200(리다이렉트 없이 그대로 서빙)으로 먼저 선언해서 와일드카드
+# 규칙보다 먼저 매치되게 한다 (Cloudflare _redirects는 위에서부터 첫
+# 매치 우선).
+/category/plan-your-trip/    /category/plan-your-trip/   200
+/category/where-to-go/       /category/where-to-go/      200
+/category/things-to-do/      /category/things-to-do/     200
+/category/korea-maps/        /category/korea-maps/       200
+
+# 2026-09-07: 1차 매뉴(그룹)마다 실제 페이지가 생겨서([topSlug]/[midSlug].astro),
+# 그 12개 경로도 와일드카드 301보다 먼저 정확히 일치하는 200으로 선언한다.
+/category/plan-your-trip/entry-and-documents/            /category/plan-your-trip/entry-and-documents/            200
+/category/plan-your-trip/money-and-connectivity/         /category/plan-your-trip/money-and-connectivity/         200
+/category/plan-your-trip/preparation-and-safety/         /category/plan-your-trip/preparation-and-safety/         200
+/category/plan-your-trip/transportation/                 /category/plan-your-trip/transportation/                 200
+/category/where-to-go/destinations/                      /category/where-to-go/destinations/                      200
+/category/where-to-go/where-to-stay/                     /category/where-to-go/where-to-stay/                     200
+/category/where-to-go/itineraries/                       /category/where-to-go/itineraries/                       200
+/category/where-to-go/must-visit-spots/                  /category/where-to-go/must-visit-spots/                  200
+/category/things-to-do/culture-and-entertainment/        /category/things-to-do/culture-and-entertainment/        200
+/category/things-to-do/food-shopping-and-local-life/     /category/things-to-do/food-shopping-and-local-life/     200
+/category/things-to-do/tours-and-nightlife/              /category/things-to-do/tours-and-nightlife/              200
+/category/things-to-do/sights-and-nature/                /category/things-to-do/sights-and-nature/                200
+
 /category/plan-your-trip/*   /category/plan-your-trip/   301
 /category/where-to-go/*      /category/where-to-go/      301
 /category/things-to-do/*     /category/things-to-do/     301
 /category/korea-maps/*       /category/korea-maps/       301
-/category/site-map/*         /category/site-map/         301
